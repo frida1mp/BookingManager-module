@@ -92,4 +92,65 @@ export class BookingManager {
     this.bookings.splice(currentBooking, 1)
     this.saveData()
   }
+
+  /**
+   * Gets all the bookings.
+   *
+   * @returns {object}
+   */
+  getAllBookings() {
+    return this.bookings
+  }
+
+  /**
+   * Gets a specific booking by id.
+   *
+   * @param {string} bookingId - The id of the booking.
+   * @returns {object} - Requested booking.
+   */
+  getBookingById(bookingId) {
+    return this.bookings.find(b => b.id === bookingId)
+  }
+
+  /**
+   * Adds a new product.
+   *
+   * @param {string} name - Given name of the product.
+   * @param {string} description - Description of the product.
+   * @param {number} price - Given price of the product.
+   * @returns {object} - new product added.
+   */
+  addProduct(name, description, price) {
+    const newProduct = new Product(name, description, price)
+    this.products.push(newProduct)
+
+    this.saveData()
+
+    return newProduct
+  }
+
+  /**
+   * Remove a specific product.
+   *
+   * @param {string} productId - The id of the product to be removed.
+   */
+  removeProductById (productId) {
+    const indexOfProduct = this.products.findIndex(p => p.id === productId)
+
+    if (indexOfProduct === -1) {
+      throw new Error('Product not found')
+    }
+
+    this.products.splice(indexOfProduct, 2)
+    this.saveData()
+  }
+
+  /**
+   * Lists all the products.
+   *
+   * @returns {object} - list of all products.
+   */
+  getAllProducts () {
+    return this.products
+  }
 }

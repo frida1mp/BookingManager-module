@@ -10,12 +10,12 @@
 export class Product {
   /**
    * Constructor to create new product.
+   *
    * @param {string} name - Name of the product.
    * @param {string} description - Description of product.
    * @param {number} price - Price of the product.
-   * @param {boolean} available - Availablity of product.
    */
-  constructor(name, description, price, available) {
+  constructor (name, description, price) {
     // this.id = //generate random id Logic
     this.name = name
     this.description = description
