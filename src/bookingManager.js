@@ -6,7 +6,6 @@
 
 import Product from './product.js'
 import Booking from './booking.js'
-import Customer from './customer.js'
 import fs from 'fs'
 
 /**
@@ -14,52 +13,37 @@ import fs from 'fs'
  */
 export class BookingManager {
   /**
-   * Constructor.
+   * Create a new Booking Manager instance.
+   *
+   * @param {*} storage -
    */
-  constructor() {
-    this.products = []
-    this.bookings = []
-    this.customers = []
+  constructor(storage) {
+    this.storage = storage
     this.loadData()
   }
 
   /**
    * Loads data from a JSON file if it exist.
    */
-  loadData() {
+  async loadData() {
     try {
-      const data = fs.readFileSync('bookings.json')
-      const parsedData = JSON.parse(data)
-      this.bookings = parsedData.bookings
-      this.products = parsedData.products
-      this.customers = parsedData.customers
+      this.bookings = await this.storage.getAllBookings()
+      this.products = await this.storage.getAllProducts()
+      this.customers = await this.storage.getAllCustomers()
     } catch (error) {
       console.log('No existing data found.')
     }
   }
 
   /**
-   * Save data in memory (no persistence).
-   *
-   */
-  saveData() {
-    const newData = {
-      bookings: this.bookings,
-      products: this.products,
-      customers: this.customers
-    }
-    fs.writeFileSync('bookings.json', JSON.stringify(newData, null, 2))
-  }
-  
-  /**
    * Adds a booking to list of bookings.
    *
-   * @param productId
-   * @param customerId
-   * @param date
+   * @param {string} productId -
+   * @param {string} customerId -
+   * @param {Date} date -
    * @returns {object} booking
    */
-  addBooking(productId, customerId, date) {
+  async addBooking(productId, customerId, date) {
     const product = this.products.find(p => p.id === productId)
     const customer = this.customers.find(c => c.id === customerId)
 
@@ -72,8 +56,9 @@ export class BookingManager {
     }
 
     const booking = new Booking(product, customer, date)
+
+    await this.storage.saveBooking(booking)
     this.bookings.push(booking)
-    this.saveData()
 
     return booking
   }
@@ -82,15 +67,15 @@ export class BookingManager {
    * Removes a booking from the list of bookings.
    * @param bookingId
    */
-  cancelBooking(bookingId) {
+  async cancelBooking(bookingId) {
     const currentBooking = this.bookings.findIndex(b => b.id === bookingId)
 
     if (currentBooking === -1) {
       throw new Error('Booking not found')
     }
+    await this.storage.removeBooking(bookingId)
 
     this.bookings.splice(currentBooking, 1)
-    this.saveData()
   }
 
   /**
@@ -120,11 +105,12 @@ export class BookingManager {
    * @param {number} price - Given price of the product.
    * @returns {object} - new product added.
    */
-  addProduct(name, description, price) {
+  async addProduct(name, description, price) {
     const newProduct = new Product(name, description, price)
-    this.products.push(newProduct)
 
-    this.saveData()
+    await this.storage.saveProduct(newProduct)
+
+    this.products.push(newProduct)
 
     return newProduct
   }
@@ -134,15 +120,14 @@ export class BookingManager {
    *
    * @param {string} productId - The id of the product to be removed.
    */
-  removeProductById (productId) {
+  async removeProductById(productId) {
     const indexOfProduct = this.products.findIndex(p => p.id === productId)
 
     if (indexOfProduct === -1) {
       throw new Error('Product not found')
     }
-
+    await this.storage.removeProduct(productId)
     this.products.splice(indexOfProduct, 2)
-    this.saveData()
   }
 
   /**
@@ -150,7 +135,7 @@ export class BookingManager {
    *
    * @returns {object} - list of all products.
    */
-  getAllProducts () {
+  getAllProducts() {
     return this.products
   }
 }
