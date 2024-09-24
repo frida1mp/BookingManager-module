@@ -4,9 +4,9 @@
  * @author Frida Pedersén <fp222ni@student.lnu.se>
  */
 
-import Product from './product.js'
-import Booking from './booking.js'
-import fs from 'fs'
+import { Product } from './product.js'
+import { Booking } from './booking.js'
+import { Customer } from './customer.js'
 
 /**
  * Represents a BookingManager class.
@@ -44,6 +44,7 @@ export class BookingManager {
    * @returns {object} booking
    */
   async addBooking(productId, customerId, date) {
+    console.log('products:', this.products)
     const product = this.products.find(p => p.id === productId)
     const customer = this.customers.find(c => c.id === customerId)
 
@@ -100,17 +101,16 @@ export class BookingManager {
   /**
    * Adds a new product.
    *
-   * @param {string} name - Given name of the product.
-   * @param {string} description - Description of the product.
-   * @param {number} price - Given price of the product.
+   * @param {object} product - Given name of the product.
    * @returns {object} - new product added.
    */
-  async addProduct(name, description, price) {
-    const newProduct = new Product(name, description, price)
+  async addProduct(product) {
+    const newProduct = new Product(product.name, product.description, product.price)
 
     await this.storage.saveProduct(newProduct)
 
     this.products.push(newProduct)
+    console.log('new', newProduct)
 
     return newProduct
   }
@@ -137,5 +137,25 @@ export class BookingManager {
    */
   getAllProducts() {
     return this.products
+  }
+
+  /**
+   * Adds a new customer.
+   */
+
+  /**
+   * Adds a new product.
+   *
+   * @param {object} customer - Given name of the product.
+   * @returns {object} - new product added.
+   */
+  async addCustomer(customer) {
+    const newCustomer = new Customer(customer.name, customer.email)
+
+    await this.storage.saveCustomer(newCustomer)
+
+    this.customers.push(newCustomer)
+
+    return newCustomer
   }
 }
