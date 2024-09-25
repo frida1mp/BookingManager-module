@@ -14,17 +14,18 @@ npm install booking-manager-module
 
 ### How to use the module
 
-##### Configure Storage
+#### Configure Storage
 The module is designed to work with different storage backends. By default, we provide a MongoStorage class that integrates with MongoDB.
 
-##### Initialize the BookingManager
+#### Initialize the BookingManager
 To use the module, first initialize the storage and pass it to the BookingManager:
 
 #### API Documentation
 The module offers the following public methods for managing bookings, products, and customers.
 
-BookingManager API
-- addBooking(productId, customerId, date)
+##### BookingManager API
+
+addBooking(productId, customerId, date)
 - Adds a new booking to the system.
 - Returns: Booking object.
 
@@ -58,16 +59,42 @@ getAllCustomers()
 - Retrieves all customers stored in the system.
 - Returns: An array of Customer objects.
 
-How to Start the Module
+#### How to Start the Module
+
 To start using the module:
 
-Ensure MongoDB is set up (see Dependencies).
-Use the MongoStorage class to connect the module to MongoDB, or implement your own storage that extends the StorageInterface.
-Dependencies
-Node.js (v14 or above)
-MongoDB (for persistence)
-Docker (for containerized setup)
-You can get MongoDB and Docker running by following these links:
+- Ensure MongoDB is set up (see Dependencies).
+- Use the MongoStorage class to connect the module to MongoDB, or implement your own storage that extends the StorageInterface.
+- Dependencies
+- Node.js (v14 or above)
+- MongoDB (for persistence)
+- Docker (for containerized setup)
 
-Install MongoDB
-Install Docker
+#### You can get MongoDB and Docker running by following these links:
+
+Install MongoDB: https://www.mongodb.com/try/download/community
+Install Docker: https://www.docker.com/products/docker-desktop/
+
+
+## For developers contributing to the project
+
+###  Bug report
+
+### Design
+
+### CI/CD Flow
+#### Linting: Code is linted on every push using ESLint.
+#### Testing: Unit tests are run using Mocha/Chai.
+#### Docker Build: A Docker image is built automatically and tested in a containerized environment.
+#### Deployment: The module is published to npm upon passing all checks.
+
+#### To contribute, please:
+
+- Fork the repository
+- Create a feature branch
+- Ensure all tests pass
+- Open a pull request for review
+
+## For examinator
+
+
