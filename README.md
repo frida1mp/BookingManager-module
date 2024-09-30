@@ -20,6 +20,8 @@ The module is designed to work with different storage backends. By default, we p
 #### Initialize the BookingManager
 To use the module, first initialize the storage and pass it to the BookingManager:
 
+![](2024-09-30-13-29-18.png)
+
 #### API Documentation
 The module offers the following public methods for managing bookings, products, and customers.
 
@@ -82,10 +84,36 @@ Install Docker: https://www.docker.com/products/docker-desktop/
 
 ### Design
 
+![](2024-09-30-14-10-46.png)
+
 ### CI/CD Flow
 #### Linting: Code is linted on every push using ESLint.
-#### Testing: Unit tests are run using Mocha/Chai.
+
+#### Testing: Unit tests are run using Jest.
+
+This project uses Jest as the testing framework for unit tests. Jest is a delightful JavaScript testing framework that focuses on simplicity. It provides a robust and user-friendly environment for testing JavaScript code, including asynchronous functions.
+
+##### Prerequisites
+
+Ensure you have the following installed before running the tests:
+
+- Node.js (version 14 or higher)
+- npm (Node package manager)
+
+Run the test using: npm test
+
+##### Writing Tests
+
+- Location: Create your test files in the __tests__ directory or in the same directory as the module you are testing, using the naming convention *.test.js.
+
+- Structure: Each test file should import the module to be tested and Jest's testing functions. Here's an example of a basic test structure:
+
+![](2024-09-30-13-31-49.png)
+
+- Mocking Dependencies: In your tests, you may need to mock dependencies to isolate the code being tested. Jest provides a powerful mocking system to simulate the behavior of modules and functions. Use jest.fn() to create mock functions and control their return values.
+
 #### Docker Build: A Docker image is built automatically and tested in a containerized environment.
+
 #### Deployment: The module is published to npm upon passing all checks.
 
 #### To contribute, please:

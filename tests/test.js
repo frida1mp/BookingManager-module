@@ -1,5 +1,5 @@
-import { BookingManager } from './src/bookingManager/bookingManager.js'
-import { MockMongoStorage } from './__mocks__/mongoStorage.js'
+import { BookingManager } from '../src/bookingManager/bookingManager.js'
+import { MockMongoStorage } from '../__mocks__/mongoStorage.js'
 import { jest } from '@jest/globals'
 
 jest.mock('./src/storage/mongoStorage.js')
@@ -36,8 +36,6 @@ describe('BookingManager', () => {
     }
     const product = await bookingManager.addProduct(newProduct)
     const products = await bookingManager.getAllProducts()
-
-    console.log('test2', products)
 
     expect(products.length).toBeGreaterThanOrEqual(1) // Test that there is one product in the product list
   })

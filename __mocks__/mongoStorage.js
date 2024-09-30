@@ -8,17 +8,16 @@ const mockMongoStorage = {
   customers: [],
 
   saveBooking: jest.fn(async (booking) => {
-    mockMongoStorage.bookings.push(booking);
+    mockMongoStorage.bookings.push(booking)
   }),
 
   saveProduct: jest.fn(async (product) => {
     mockMongoStorage.products.push(product)
-    console.log('test1', mockMongoStorage.products)
   }),
 
   saveCustomer: jest.fn(async (customer) => {
-    mockMongoStorage.customers.push(customer);
-    return { insertedId: customer.id }; // Simulate MongoDB's response
+    mockMongoStorage.customers.push(customer)
+    return { insertedId: customer.id } // Simulate MongoDB's response
   }),
 
   getAllBookings: jest.fn(async () => mockMongoStorage.bookings), // Simulate fetching all bookings
@@ -26,29 +25,29 @@ const mockMongoStorage = {
   getAllCustomers: jest.fn(async () => mockMongoStorage.customers), // Simulate fetching all customers
 
   removeBooking: jest.fn(async (bookingId) => {
-    const index = mockMongoStorage.bookings.findIndex(b => b.id === bookingId);
+    const index = mockMongoStorage.bookings.findIndex(b => b.id === bookingId)
     if (index !== -1) {
-      mockMongoStorage.bookings.splice(index, 1);
-      return { deletedCount: 1 }; // Simulate deletion
+      mockMongoStorage.bookings.splice(index, 1)
+      return { deletedCount: 1 } // Simulate deletion
     }
-    return { deletedCount: 0 }; // No booking found
+    return { deletedCount: 0 } // No booking found
   }),
 
   removeProduct: jest.fn(async (productId) => {
-    const index = mockMongoStorage.products.findIndex(p => p.id === productId);
+    const index = mockMongoStorage.products.findIndex(p => p.id === productId)
     if (index !== -1) {
-      mockMongoStorage.products.splice(index, 1);
-      return { deletedCount: 1 }; // Simulate deletion
+      mockMongoStorage.products.splice(index, 1)
+      return { deletedCount: 1 } // Simulate deletion
     }
-    return { deletedCount: 0 }; // No product found
+    return { deletedCount: 0 } // No product found
   }),
 
   connect: jest.fn(),
-};
+}
 
 export class MockMongoStorage extends MongoStorage {
   constructor(uri, databaseName) {
-    super(uri, databaseName);
-    return mockMongoStorage; // Return the mock implementation
+    super(uri, databaseName)
+    return mockMongoStorage // Return the mock implementation
   }
 }

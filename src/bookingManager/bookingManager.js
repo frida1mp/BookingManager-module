@@ -112,7 +112,6 @@ export class BookingManager {
     await this.storage.saveProduct(newProduct)
 
     this.products.push(newProduct)
-    console.log('new', this.products)
 
     return newProduct
   }
