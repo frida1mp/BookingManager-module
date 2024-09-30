@@ -67,14 +67,16 @@ export class BookingManager {
    * @param bookingId
    */
   async cancelBooking(bookingId) {
+    console.log('cancel', this.bookings)
     const currentBooking = this.bookings.findIndex(b => b.id === bookingId)
-
     if (currentBooking === -1) {
       throw new Error('Booking not found')
     }
     await this.storage.removeBooking(bookingId)
 
     this.bookings.splice(currentBooking, 1)
+
+    console.log('canceled???', this.bookings)
   }
 
   /**
@@ -107,12 +109,13 @@ export class BookingManager {
    * @returns {object} - new product added.
    */
   async addProduct(product) {
+    console.log('pr', product)
     const newProduct = new Product(product.name, product.description, product.price)
 
     await this.storage.saveProduct(newProduct)
 
     this.products.push(newProduct)
-
+    console.log('product,', newProduct)
     return newProduct
   }
 
@@ -121,7 +124,7 @@ export class BookingManager {
    *
    * @param {string} productId - The id of the product to be removed.
    */
-  async removeProductById(productId) {
+  async removeProduct(productId) {
     const indexOfProduct = this.products.findIndex(p => p.id === productId)
 
     if (indexOfProduct === -1) {
