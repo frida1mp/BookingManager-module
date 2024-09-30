@@ -44,7 +44,6 @@ export class BookingManager {
    * @returns {object} booking
    */
   async addBooking(productId, customerId, date) {
-    console.log('products:', this.products)
     const product = this.products.find(p => p.id === productId)
     const customer = this.customers.find(c => c.id === customerId)
 
@@ -60,7 +59,6 @@ export class BookingManager {
 
     await this.storage.saveBooking(booking)
     this.bookings.push(booking)
-
     return booking
   }
 
@@ -85,7 +83,11 @@ export class BookingManager {
    * @returns {object}
    */
   getAllBookings() {
-    return this.bookings
+    try {
+      return this.bookings
+    } catch (error) {
+      throw new Error('No bookings founde')
+    }
   }
 
   /**
@@ -110,7 +112,7 @@ export class BookingManager {
     await this.storage.saveProduct(newProduct)
 
     this.products.push(newProduct)
-    console.log('new', newProduct)
+    console.log('new', this.products)
 
     return newProduct
   }
@@ -135,7 +137,7 @@ export class BookingManager {
    *
    * @returns {object} - list of all products.
    */
-  getAllProducts() {
+  getAllProducts () {
     return this.products
   }
 

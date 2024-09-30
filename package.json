@@ -1,11 +1,11 @@
 {
-    "name": "lab1",
-    "version": "1.1.1",
-    "description": "1DV610 - Lab 1 - Hello",
+    "name": "booking-manager-module",
+
+    "version": "1.0.0",
+    "description": "A booking system module with MongoDB storage integrations",
     "type": "module",
-    "main": "src/app.js",
+    "main": "src/bookingManager/bookingManager.js",
     "scripts": {
-        "start": "node src/app.js",
         "lint": "npx eslint ./src || exit 0",
         "lint:fix": "npx eslint ./src --fix || exit 0",
         "test": "npx --node-options=--experimental-vm-modules jest || exit 0"
@@ -16,8 +16,12 @@
     "license": "MIT",
     "private": true,
     "devDependencies": {
+        "@babel/core": "^7.25.2",
+        "@babel/plugin-transform-modules-commonjs": "^7.24.8",
+        "@babel/preset-env": "^7.25.4",
         "@lnu/eslint-config": "^1.1.10",
-        "jest": "^29.6.3"
+        "babel-jest": "^29.7.0",
+        "jest": "^29.7.0"
     },
     "dependencies": {
         "mongodb": "^6.9.0"

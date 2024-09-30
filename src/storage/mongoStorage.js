@@ -23,7 +23,6 @@ export class MongoStorage extends StorageInterface {
    */
   async connect () {
     await this.client.connect()
-    console.log('connection established')
     this.db = this.client.db(this.dbName)
     this.bookingsCollection = this.db.collection('bookings')
     this.productsCollection = this.db.collection('products')
