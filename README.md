@@ -1,7 +1,7 @@
 # BookingManager
 
 ## Overview
-The Booking Manager module provides a flexible and reusable system for managing bookings, customers, and products. It is designed to be easily integrated with the storage solution MongoDB, enabling developers to add booking functionality to their applications.
+The Booking Manager module provides a flexible and reusable system for managing bookings, customers, and products. It is designed to be easily integrated with the a storage solution like MongoDB, enabling developers to add booking functionality to their applications.
 
 Whether you're building an app for small businesses, appointment scheduling, or event management, this module provides a robust and adaptable backend for booking management.
 
@@ -15,12 +15,12 @@ npm install booking-manager-module
 ### How to use the module
 
 #### Configure Storage
-The module is designed to work with different storage backends. By default, we provide a MongoStorage class that integrates with MongoDB.
+The module is designed to work with different storage backends. By default, we provide a StorageInterface class that can be integrated with MongoDB or other solutions.
 
 #### Initialize the BookingManager
-To use the module, first initialize the storage and pass it to the BookingManager:
+To use the module, first initialize your chosen storage and pass it to the BookingManager. See example below:
 
-![Getting Started](./images/scrnsht2.png)
+![Getting Started](./images/Screenshot%202024-10-01%20at%2016.42.28.png)
 
 #### API Documentation
 The module offers the following public methods for managing bookings, products, and customers.
