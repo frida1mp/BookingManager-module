@@ -98,6 +98,8 @@ Ensure you have the following installed before running the tests:
 
 - Node.js (version 14 or higher)
 - npm (Node package manager)
+- Jest
+- Babel
 
 Run the test using: npm test
 

@@ -9,7 +9,7 @@ import { Product } from './product.js'
 
 /**
  * Represents a Booking made by customer.
- * 
+ *
  */
 export class Booking {
   /**

@@ -44,39 +44,64 @@ export class BookingManager {
    * @returns {object} booking
    */
   async addBooking(productId, customerId, date) {
-    const product = this.products.find(p => p.id === productId)
-    const customer = this.customers.find(c => c.id === customerId)
+    try {
+      // Find the product and customer by their IDs
+      const product = this.products.find(p => p.id === productId)
+      const customer = this.customers.find(c => c.id === customerId)
 
-    if (!product) {
-      throw new Error('Product not found.')
+      // Check if the product exists
+      if (!product) {
+        throw new Error('Product not found.')
+      }
+
+      // Check if the customer exists
+      if (!customer) {
+        throw new Error('Customer not found.')
+      }
+
+      // Create a new booking instance
+      const booking = new Booking(product, customer, date)
+
+      // Save the booking to storage and add it to the bookings array
+      await this.storage.saveBooking(booking)
+      this.bookings.push(booking)
+
+      // Return the created booking
+      return booking
+    } catch (error) {
+      // Log the error and rethrow it
+      console.error('Error adding booking:', error.message)
+      throw new Error(error.message)
     }
-
-    if (!customer) {
-      throw new Error('Customer not found.')
-    }
-
-    const booking = new Booking(product, customer, date)
-
-    await this.storage.saveBooking(booking)
-    this.bookings.push(booking)
-    return booking
   }
 
   /**
    * Removes a booking from the list of bookings.
-   * @param bookingId
+   *
+   * @param {string} bookingId -
    */
   async cancelBooking(bookingId) {
-    console.log('cancel', this.bookings)
-    const currentBooking = this.bookings.findIndex(b => b.id === bookingId)
-    if (currentBooking === -1) {
-      throw new Error('Booking not found')
+    try {
+      // Find the index of the booking
+      const currentBooking = this.bookings.findIndex(b => b.id === bookingId)
+
+      // Check if the booking exists
+      if (currentBooking === -1) {
+        throw new Error(`Booking with id ${bookingId} not found.`)
+      }
+
+      // Remove the booking from storage
+      await this.storage.removeBooking(bookingId)
+
+      // Remove the booking from the bookings array
+      this.bookings.splice(currentBooking, 1)
+
+      console.log(`Booking with id ${bookingId} has been successfully removed.`)
+    } catch (error) {
+      // Log and rethrow any error that occurs
+      console.error('Error cancelling booking:', error.message)
+      throw new Error('Failed to cancel the booking.')
     }
-    await this.storage.removeBooking(bookingId)
-
-    this.bookings.splice(currentBooking, 1)
-
-    console.log('canceled???', this.bookings)
   }
 
   /**
@@ -99,7 +124,20 @@ export class BookingManager {
    * @returns {object} - Requested booking.
    */
   getBookingById(bookingId) {
-    return this.bookings.find(b => b.id === bookingId)
+    try {
+      const booking = this.bookings.find(b => b.id === bookingId)
+
+      // Check if the booking was found
+      if (!booking) {
+        throw new Error(`Booking with id ${bookingId} not found.`)
+      }
+
+      return booking
+    } catch (error) {
+      // Handle any errors that occurred during the process
+      console.error('Error retrieving booking:', error.message)
+      throw new Error('Failed to retrieve booking.')
+    }
   }
 
   /**
@@ -109,14 +147,16 @@ export class BookingManager {
    * @returns {object} - new product added.
    */
   async addProduct(product) {
-    console.log('pr', product)
-    const newProduct = new Product(product.name, product.description, product.price)
+    try {
+      const newProduct = new Product(product.name, product.description, product.price)
 
-    await this.storage.saveProduct(newProduct)
+      await this.storage.saveProduct(newProduct)
 
-    this.products.push(newProduct)
-    console.log('product,', newProduct)
-    return newProduct
+      this.products.push(newProduct)
+      return newProduct
+    } catch (error) {
+      console.error('Product could not be added.')
+    }
   }
 
   /**
@@ -137,29 +177,42 @@ export class BookingManager {
   /**
    * Lists all the products.
    *
-   * @returns {object} - list of all products.
+   * @returns {Array} - list of all products.
    */
-  getAllProducts () {
-    return this.products
+  getAllProducts() {
+    try {
+      return this.products
+    } catch (error) {
+      console.error('Error retrieving products:', error.message)
+      throw new Error(error.message)
+    }
   }
 
   /**
    * Adds a new customer.
-   */
-
-  /**
-   * Adds a new product.
    *
-   * @param {object} customer - Given name of the product.
-   * @returns {object} - new product added.
+   * @param {object} customer - Given name of the customer.
+   * @returns {object} - new customer added.
    */
   async addCustomer(customer) {
-    const newCustomer = new Customer(customer.name, customer.email)
+    try {
+      // Validate that customer has a valid name and email
+      if (!customer.name || !customer.email) {
+        throw new Error('Invalid customer data. Name and email are required.')
+      }
 
-    await this.storage.saveCustomer(newCustomer)
+      const newCustomer = new Customer(customer.name, customer.email)
 
-    this.customers.push(newCustomer)
+      // Save the new customer using the storage interface
+      await this.storage.saveCustomer(newCustomer)
 
-    return newCustomer
+      // Add the new customer to the customers array
+      this.customers.push(newCustomer)
+
+      return newCustomer
+    } catch (error) {
+      console.error('Error adding customer:', error.message)
+      throw new Error('Failed to add new customer.')
+    }
   }
 }
