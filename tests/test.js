@@ -17,14 +17,23 @@ describe('BookingManager', () => {
   })
 
   /**
+   * Creates new product.
    *
+   * @param {string} name -
+   * @param {string} description -
+   * @param {number} price -
+   * @returns {object} - new product.
    */
   const createNewProduct = async (name = 'Product A', description = 'testing', price = 100) => {
     return await bookingManager.addProduct({ name, description, price })
   }
 
   /**
+   * Creates new customer.
    *
+   * @param {string} name -
+   * @param {string} email -
+   * @returns {object} - customer
    */
   const createNewCustomer = async (name = 'Test Customer', email = 'customer@example.com') => {
     return await bookingManager.addCustomer({ name, email })

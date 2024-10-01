@@ -19,7 +19,7 @@ export class Booking {
    * @param {Customer} customer - The customer making the booking.
    * @param {Date} date - The date of the booking.
    */
-  constructor(product, customer, date) {
+  constructor (product, customer, date) {
     // this.id = //generate random id Logic
     this.product = product
     this.customer = customer
@@ -33,14 +33,14 @@ export class Booking {
    *
    * @returns {string} - A unique customer ID.
    */
-  generateUniqueId() {
-    return 'cust-' + Date.now().toString(36) + '-' + Math.random().toString(36).substring(2, 8);
+  generateUniqueId () {
+    return 'cust-' + Date.now().toString(36) + '-' + Math.random().toString(36).substring(2, 8)
   }
 
   /**
    * Cancels the booking.
    */
-  cancel() {
+  cancel () {
     this.cancelled = true
   }
 
@@ -49,7 +49,7 @@ export class Booking {
    *
    * @returns {boolean}
    */
-  isCancelled() {
+  isCancelled () {
     return this.cancelled
   }
 }
