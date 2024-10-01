@@ -2,7 +2,7 @@ import { BookingManager } from '../src/bookingManager/bookingManager.js'
 import { MockMongoStorage } from './__mocks__/mongoStorage.js'
 import { jest } from '@jest/globals'
 
-jest.mock('../src/storage/mongoStorage.js')
+jest.mock('./mongoStorage.js')
 describe('BookingManager', () => {
   let bookingManager
   let mongoStorageMock

@@ -83,8 +83,7 @@ Install Docker: https://www.docker.com/products/docker-desktop/
 ###  Bug report
 
 ### Design
-![Getting Started](./images/UML-klass.jpeg)
-
+![Getting Started](./images/UML-klass%20(1).jpeg)
 ### CI/CD Flow
 #### Linting: Code is linted on every push using ESLint.
 

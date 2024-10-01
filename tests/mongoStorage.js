@@ -1,5 +1,5 @@
 import { MongoClient } from 'mongodb'
-import StorageInterface from './storageInterface.js'
+import StorageInterface from '../src/storage/storageInterface'
 
 /**
  * Represents a MongoStorage class.

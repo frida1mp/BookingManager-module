@@ -1,5 +1,5 @@
 // __mocks__/mongoStorage.js
-import { MongoStorage } from '../../src/storage/mongoStorage.js'
+import { MongoStorage } from '../mongoStorage.js'
 import { jest } from '@jest/globals'
 
 const mockMongoStorage = {

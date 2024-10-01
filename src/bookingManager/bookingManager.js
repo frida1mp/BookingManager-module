@@ -17,7 +17,7 @@ export class BookingManager {
    *
    * @param {*} storage -
    */
-  constructor (storage) {
+  constructor(storage) {
     this.storage = storage
     this.loadData()
   }
@@ -25,7 +25,7 @@ export class BookingManager {
   /**
    * Loads data from a JSON file if it exist.
    */
-  async loadData () {
+  async loadData() {
     try {
       this.bookings = await this.storage.getAllBookings()
       this.products = await this.storage.getAllProducts()
@@ -43,7 +43,7 @@ export class BookingManager {
    * @param {Date} date -
    * @returns {object} booking
    */
-  async addBooking (productId, customerId, date) {
+  async addBooking(productId, customerId, date) {
     try {
       // Find the product and customer by their IDs
       const product = this.products.find(p => p.id === productId)
@@ -80,7 +80,7 @@ export class BookingManager {
    *
    * @param {string} bookingId -
    */
-  async cancelBooking (bookingId) {
+  async cancelBooking(bookingId) {
     try {
       // Find the index of the booking
       const currentBooking = this.bookings.findIndex(b => b.id === bookingId)
@@ -109,7 +109,7 @@ export class BookingManager {
    *
    * @returns {object}
    */
-  getAllBookings () {
+  getAllBookings() {
     try {
       return this.bookings
     } catch (error) {
@@ -123,7 +123,7 @@ export class BookingManager {
    * @param {string} bookingId - The id of the booking.
    * @returns {object} - Requested booking.
    */
-  getBookingById (bookingId) {
+  getBookingById(bookingId) {
     try {
       const booking = this.bookings.find(b => b.id === bookingId)
 
@@ -146,8 +146,12 @@ export class BookingManager {
    * @param {object} product - Given name of the product.
    * @returns {object} - new product added.
    */
-  async addProduct (product) {
+  async addProduct(product) {
     try {
+      // Validate product data
+      if (!product.name || !product.description || !product.price) {
+        throw new Error('Invalid product data. Name, description, and price are required.')
+      }
       const newProduct = new Product(product.name, product.description, product.price)
 
       await this.storage.saveProduct(newProduct)
@@ -164,7 +168,7 @@ export class BookingManager {
    *
    * @param {string} productId - The id of the product to be removed.
    */
-  async removeProduct (productId) {
+  async removeProduct(productId) {
     const indexOfProduct = this.products.findIndex(p => p.id === productId)
 
     if (indexOfProduct === -1) {
@@ -179,7 +183,7 @@ export class BookingManager {
    *
    * @returns {Array} - list of all products.
    */
-  getAllProducts () {
+  getAllProducts() {
     try {
       return this.products
     } catch (error) {
@@ -194,7 +198,7 @@ export class BookingManager {
    * @param {object} customer - Given name of the customer.
    * @returns {object} - new customer added.
    */
-  async addCustomer (customer) {
+  async addCustomer(customer) {
     try {
       // Validate that customer has a valid name and email
       if (!customer.name || !customer.email) {

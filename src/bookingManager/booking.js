@@ -50,6 +50,9 @@ export class Booking {
    * @returns {boolean}
    */
   isCancelled () {
+    if (this.cancelled) {
+      console.log(`Booking with ID ${this.id} is cancelled.`)
+    }
     return this.cancelled
   }
 }

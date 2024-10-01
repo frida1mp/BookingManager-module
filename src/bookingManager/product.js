@@ -30,7 +30,7 @@ export class Product {
    * @returns {string} - A unique customer ID.
    */
   generateUniqueId () {
-    return 'cust-' + Date.now().toString(36) + '-' + Math.random().toString(36).substring(2, 8);
+    return 'cust-' + Date.now().toString(36) + '-' + Math.random().toString(36).substring(2, 8)
   }
 
   /**
@@ -56,7 +56,13 @@ export class Product {
   * 
   * @param {boolean} newStatus - The new availability status.
   */
-  setAvailability(newStatus) {
-    this.available = newStatus
+  setAvailability (newStatus) {
+    if (typeof newStatus !== 'boolean') {
+      throw new Error('Invalid status. Availability status must be a boolean.')
+    }
+    if (this.available !== newStatus) {
+      this.available = newStatus
+      console.log(`Product ${this.name} availability changed to ${newStatus}.`)
+    }
   }
 }
