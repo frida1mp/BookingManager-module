@@ -82,6 +82,8 @@ Install Docker: https://www.docker.com/products/docker-desktop/
 
 ###  Bug report
 
+See issues in repository. 
+
 ### Design
 ![Getting Started](./images/UML-klass%20(1).jpeg)
 ### CI/CD Flow
@@ -122,7 +124,5 @@ Run the test using: npm test
 - Create a feature branch
 - Ensure all tests pass
 - Open a pull request for review
-
-## For examinator
 
 
