@@ -168,14 +168,20 @@ export class BookingManager {
    *
    * @param {string} productId - The id of the product to be removed.
    */
-  async removeProduct(productId) {
-    const indexOfProduct = this.products.findIndex(p => p.id === productId)
+  async removeProduct (productId) {
+    try {
+      const indexOfProduct = this.products.findIndex(p => p.id === productId)
 
-    if (indexOfProduct === -1) {
-      throw new Error('Product not found')
+      if (indexOfProduct === -1) {
+        throw new Error('Product not found')
+      }
+      await this.storage.removeProduct(productId)
+      this.products.splice(indexOfProduct, 2)
+
+      console.log('Product', productId, 'has been removed successfully')
+    } catch {
+
     }
-    await this.storage.removeProduct(productId)
-    this.products.splice(indexOfProduct, 2)
   }
 
   /**
