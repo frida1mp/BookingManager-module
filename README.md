@@ -207,7 +207,7 @@ Output ex: new Customer {
 See issues in repository. 
 
 ### Design
-![Getting Started](./images/UML-klass%20(1).jpeg)
+![Getting Started](./images/umlClass.jpeg)
 ### CI/CD Flow
 #### Linting: Code is linted on every push using ESLint.
 
