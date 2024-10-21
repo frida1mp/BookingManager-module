@@ -1,19 +1,19 @@
 import { BookingManager } from '../src/bookingManager/bookingManager.js'
-import { MockMongoStorage } from './__mocks__/mongoStorage.js'
+import { ArrayStorage } from './arrayStorage.js'
 import { jest } from '@jest/globals'
 
-jest.mock('./mongoStorage.js')
+jest.mock('./__mocks__/arrayStorage.js')
 describe('BookingManager', () => {
   let bookingManager
-  let mongoStorageMock
+  let arrayStorage
 
   beforeEach(() => {
-    mongoStorageMock = new MockMongoStorage('mongodb://localhost:27017', 'testDB')
-    bookingManager = new BookingManager(mongoStorageMock)
+    arrayStorage = new ArrayStorage()
+    bookingManager = new BookingManager(arrayStorage)
     // Reset the mock storage before each test
-    mongoStorageMock.bookings = []
-    mongoStorageMock.products = []
-    mongoStorageMock.customers = []
+    arrayStorage.bookings = []
+    arrayStorage.products = []
+    arrayStorage.customers = []
   })
 
   /**
