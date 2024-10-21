@@ -159,7 +159,7 @@ export class BookingManager {
       this.products.push(newProduct)
       return newProduct
     } catch (error) {
-      console.error('Product could not be added.')
+      console.error('Product could not be added.', error)
     }
   }
 
