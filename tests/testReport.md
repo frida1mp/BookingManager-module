@@ -1,8 +1,6 @@
-## Testing
+# Testing
 
-The module is tested using the framework Jest together with Babel to make it compatible with ESM used in the code.
-
-### To run test
+## To run test
 
 - Make sure dependencies are installed (node, Jest and Babel)
 - Run with: npm test
@@ -21,6 +19,11 @@ Precondition:
 ### Test steps
 
 * Make new booking with an invalid product ID using bookingManager.addBooking()
+
+```js
+    const booking = await bookingManager.addBooking('invalidIdInput', newCustomer.id, date)
+```
+
 * Check that the error to be "Product not found."
 
 
@@ -40,8 +43,31 @@ Precondition:
 ### Test steps
 
 * Create a new product using bookingManager.addProduct()
+
+```js
+const createNewProduct = async (name = 'Product A', description = 'testing', price = 100) => {
+    return await bookingManager.addProduct({ name, description, price })
+  }
+```
+
 * Create a new customer using bookingManager.addCustomer()
+
+```js
+const createNewCustomer = async (name = 'Test Customer', email = 'customer@example.com') => {
+    return await bookingManager.addCustomer({ name, email })
+  }
+```
+
 * Add new booking for the product and customer using bookingManager.addBooking()
+```js
+const newProduct = await createNewProduct()
+
+    const newCustomer = await createNewCustomer()
+
+    const date = Date()
+
+    const booking = await bookingManager.addBooking(newProduct.id, newCustomer.id, date)
+```
 * Check that the booking is added to system and has the correct name.
 
 
@@ -60,9 +86,37 @@ Precondition:
 ### Test steps
 
 * Create a new product using bookingManager.addProduct()
+
+```js
+const createNewProduct = async (name = 'Product A', description = 'testing', price = 100) => {
+    return await bookingManager.addProduct({ name, description, price })
+  }
+```
+
 * Create a new customer using bookingManager.addCustomer()
+
+```js
+const createNewCustomer = async (name = 'Test Customer', email = 'customer@example.com') => {
+    return await bookingManager.addCustomer({ name, email })
+  }
+```
+
 * Add new booking for the product and customer using bookingManager.addBooking()
+
+```js
+const newProduct = await createNewProduct()
+
+    const newCustomer = await createNewCustomer()
+
+    const date = Date()
+
+    const booking = await bookingManager.addBooking(newProduct.id, newCustomer.id, date)
+```
+
 * Retrieve list of all bookings and check that the list contains at least one booking.
+```js
+    const bookings = await bookingManager.getAllBookings()
+```
 
 
 ### Expected
@@ -82,13 +136,39 @@ Precondition:
 ### Test steps
 
 * Create a new product using bookingManager.addProduct()
+```js
+const newProduct = {
+    name = 'Product A', 
+    description = testing',
+    price = 100
+    }
+const product = bookingManager.addProduct(newProduct)
+```
 * Create a new customer using bookingManager.addCustomer()
+```js
+const newCustomer = {
+    name = 'Test', 
+    email = testing@gmail.com'
+    }
+const customer = bookingManager.addCustomer(newCustomer)
+```
 * Add new booking for the product and customer using bookingManager.addBooking()
+```js
+    const booking = await bookingManager.addBooking(product.id, customer.id, date)
+```
+
 * Cancel the same booking using bookingManger.cancelBooking()
+```js
+    const canceledBooking = await bookingManager.cancelBooking(booking.id)
+```
+
 * Check that booking is removed.
 
 ### Expected
 Booking that is canceled is undefined.
+```js
+console.log(booking) // logs undefined
+```
 
 
 | Test      | UC1 (Add booking with invalid prodId) | UC2 (Add new booking) | UC3 (Get all bookings) | UC3 (Cancel booking) |
@@ -117,7 +197,17 @@ Precondition:
 ### Test steps
 
 * Add new customer by using bookingManager.addCustomer()
+```js
+const newCustomer = {
+    name = 'Test', 
+    email = testing@gmail.com'
+    }
+const customer = bookingManager.addCustomer(newCustomer)
+```
 * Check that the customer is defined and has the name "Test Customer"
+```js
+console.log(customer, customer.name)
+```
 
 ### Expected
 Customer is added with correct data.
@@ -145,9 +235,23 @@ Precondition:
 ### Test steps
 
 * Create a new product using bookingManager.addProduct()
+```js
+const newProduct = {
+    name = 'Product A', 
+    description = testing',
+    price = 100
+    }
+const product = bookingManager.addProduct(newProduct)
+```
 * Verify that the product has been added and is defined.
-* Check that the product has the correct name "Product A"
+```js
+console.log(product)
 
+```* Check that the product has the correct name "Product A"
+```js
+console.log(product.name)
+
+```
 
 ### Expected
 The product is added with the correct data.
@@ -165,9 +269,24 @@ Precondition:
 ### Test steps
 
 * Create a new product using bookingManager.addProduct()
+```js
+const newProduct = {
+    name = 'Product A', 
+    description = testing',
+    price = 100
+    }
+const product = bookingManager.addProduct(newProduct)
+```
 * Retrieve all products using bookingManager.getAllProducts().
-* Check that the product list contains at least one product.
+```js
+    const products = await bookingManager.getAllProducts()
+```
 
+* Check that the product list contains at least one product.
+```js
+>console.log(products)
+
+```
 
 ### Expected
 At least one product is retrieved.
@@ -185,8 +304,24 @@ Precondition:
 ### Test steps
 
 * Create a new product using bookingManager.addProduct()
+```js
+const newProduct = {
+    name = 'Product A', 
+    description = testing',
+    price = 100
+    }
+const product = bookingManager.addProduct(newProduct)
+```
 * Remove the same product using by using its ID in bookingManager.removeProduct()
+```js
+bookingManager.removeProduct(newProduct.id)
+
+```
 * Retrieve list of all products and check that the product is not apart of the list.
+```js
+    const products = await bookingManager.getAllProducts()
+    console.log(products)
+```
 
 
 ### Expected
@@ -205,5 +340,8 @@ The product is removed from list.
 
 
 All tests passed.
+** Error thrown: Error is thrown when trying to add a booking with an invalid product id.
 
 ![alt text](<Screenshot 2024-10-01 at 13.33.30.png>)
+
+

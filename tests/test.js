@@ -50,7 +50,6 @@ describe('BookingManager', () => {
     const newProduct = await createNewProduct()
     await bookingManager.addProduct(newProduct)
     const products = await bookingManager.getAllProducts()
-
     expect(products.length).toBeGreaterThanOrEqual(1) // Test that there is one product in the product list
   })
 
