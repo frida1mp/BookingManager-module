@@ -9,7 +9,7 @@ Imagine you’re building an appointment booking system for a small business, li
 
 With just a few lines of code, you can integrate a fully functional booking system into your application. Whether you’re managing time slots for multiple staff members or handling inventory for products and services, this module allows you to focus on building the user experience while leaving the backend booking management to the module.
 
-![Example of use](./image)
+![Example of use](./images/exuse.png)
 
 
 ## For users
