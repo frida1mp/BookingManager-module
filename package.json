@@ -1,6 +1,6 @@
 {
     "name": "booking-manager-module",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "description": "A booking system module with MongoDB storage integrations",
     "type": "module",
     "main": "src/bookingManager/bookingManager.js",
