@@ -1,13 +1,11 @@
-// __mocks__/mongoStorage.js
-import { jest } from '@jest/globals'
-
 /**
- * Represents a mockArrayStorage class.
- */
+ * @file MockArrayStorage class
+ * @module test/MockArrayStorage
+ * @author Frida Pedersén <fp222ni@student.lnu.se>
+ */import { jest } from '@jest/globals'
+
 export class MockArrayStorage {
-  /**
-   * Initializes mock storage with empty arrays for bookings, products, and customers.
-   */
+
   constructor () {
     this.bookings = []
     this.products = []
@@ -19,32 +17,32 @@ export class MockArrayStorage {
   })
 
   saveProduct = jest.fn(async (product) => {
-    mockArrayStorage.this.products.push(product)
+    this.products.push(product)
   })
 
   saveCustomer = jest.fn(async (customer) => {
-    mockArrayStorage.this.customers.push(customer)
-    return { insertedId: customer.id } // Simulate MongoDB's response
+    this.customers.push(customer)
+    return { insertedId: customer.id }
   })
 
-  getAllBookings = jest.fn(async () => mockArrayStorage.this.bookings) // Simulate fetching all this.bookings
-  getAllProducts = jest.fn(async () => mockArrayStorage.this.products) // Simulate fetching all this.products
-  getAllCustomers = jest.fn(async () => mockArrayStorage.this.customers) // Simulate fetching all this.customers
+  getAllBookings = jest.fn(async () => this.bookings) 
+  getAllProducts = jest.fn(async () => this.products)
+  getAllCustomers = jest.fn(async () => this.customers)
 
   removeBooking = jest.fn(async (bookingId) => {
-    const index = mockArrayStorage.this.bookings.findIndex(b => b.id === bookingId)
+    const index = this.bookings.findIndex(b => b.id === bookingId)
     if (index !== -1) {
-      mockArrayStorage.this.bookings.splice(index, 1)
-      return { deletedCount: 1 } // Simulate deletion
+      this.bookings.splice(index, 1)
+      return { deletedCount: 1 }
     }
     return { deletedCount: 0 } // No booking found
   })
 
   removeProduct = jest.fn(async (productId) => {
-    const index = mockArrayStorage.this.products.findIndex(p => p.id === productId)
+    const index = this.products.findIndex(p => p.id === productId)
     if (index !== -1) {
-      mockArrayStorage.this.products.splice(index, 1)
-      return { deletedCount: 1 } // Simulate deletion
+      this.products.splice(index, 1)
+      return { deletedCount: 1 }
     }
     return { deletedCount: 0 } // No product found
   })

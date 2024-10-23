@@ -1,3 +1,6 @@
+/**
+ * @author Frida Pedersén <fp222ni@student.lnu.se>
+ */
 import { BookingManager } from '../src/bookingManager/bookingManager.js'
 import { ArrayStorage } from './arrayStorage.js'
 import { jest } from '@jest/globals'
@@ -16,25 +19,10 @@ describe('BookingManager', () => {
     arrayStorage.customers = []
   })
 
-  /**
-   * Creates new product.
-   *
-   * @param {string} name -
-   * @param {string} description -
-   * @param {number} price -
-   * @returns {object} - new product.
-   */
   const createNewProduct = async (name = 'Product A', description = 'testing', price = 100) => {
     return await bookingManager.addProduct({ name, description, price })
   }
 
-  /**
-   * Creates new customer.
-   *
-   * @param {string} name -
-   * @param {string} email -
-   * @returns {object} - customer
-   */
   const createNewCustomer = async (name = 'Test Customer', email = 'customer@example.com') => {
     return await bookingManager.addCustomer({ name, email })
   }
@@ -42,15 +30,15 @@ describe('BookingManager', () => {
   test('should add a new product', async () => {
     const newProduct = await createNewProduct()
 
-    expect(newProduct).toBeDefined() // Test that the product is defined
-    expect(newProduct.name).toBe('Product A') // Check that the correct product was added
+    expect(newProduct).toBeDefined()
+    expect(newProduct.name).toBe('Product A') 
   })
 
   test('should get all products', async () => {
     const newProduct = await createNewProduct()
     await bookingManager.addProduct(newProduct)
     const products = await bookingManager.getAllProducts()
-    expect(products.length).toBeGreaterThanOrEqual(1) // Test that there is one product in the product list
+    expect(products.length).toBeGreaterThanOrEqual(1) 
   })
 
   test('should remove a product', async () => {
@@ -78,8 +66,8 @@ describe('BookingManager', () => {
 
     const booking = await bookingManager.addBooking(newProduct.id, newCustomer.id, date)
 
-    expect(booking).toBeDefined() // Test that the product is defined
-    expect(booking.product.name).toBe('Product A') // Check that the correct product was added
+    expect(booking).toBeDefined() 
+    expect(booking.product.name).toBe('Product A') 
   })
 
   test('should create new customer', async () => {
@@ -98,7 +86,7 @@ describe('BookingManager', () => {
     const bookings = await bookingManager.getAllBookings()
 
     expect(booking).toBeDefined()
-    expect(bookings.length).toBeGreaterThanOrEqual(1) // Check that the correct product was added
+    expect(bookings.length).toBeGreaterThanOrEqual(1) 
   })
 
   test('should cancel a booking', async () => {
@@ -126,3 +114,4 @@ describe('BookingManager', () => {
     expect(bookingById.id).toBe(booking.id)
   })
 })
+
