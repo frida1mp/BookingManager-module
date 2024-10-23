@@ -32,6 +32,9 @@ export class BookingManager {
       this.customers = await this.storage.getAllCustomers() || []
     } catch (error) {
       console.log('No existing data found.')
+      this.bookings = []
+      this.products = []
+      this.customers = []
     }
   }
 
@@ -168,7 +171,7 @@ export class BookingManager {
    *
    * @param {string} productId - The id of the product to be removed.
    */
-  async removeProduct (productId) {
+  async removeProduct(productId) {
     try {
       const indexOfProduct = this.products.findIndex(p => p.id === productId)
 
