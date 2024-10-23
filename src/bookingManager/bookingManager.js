@@ -20,7 +20,7 @@ export class BookingManager {
       this.products = await this.storage.getAllProducts() || []
       this.customers = await this.storage.getAllCustomers() || []
     } catch (error) {
-      console.log('No existing data found.')
+      console.log('No existing data found. Initializing empty arrays.')
       this.bookings = []
       this.products = []
       this.customers = []
@@ -29,8 +29,8 @@ export class BookingManager {
 
   async addBooking(productId, customerId, date) {
     try {
-      const product = this.products.find(p => p.id === productId)
-      const customer = this.customers.find(c => c.id === customerId)
+      const product = this.findProductById(productId)
+      const customer = this.findCustomerById(customerId)
 
       if (!product) {
         throw new Error('Product not found.')
@@ -47,9 +47,17 @@ export class BookingManager {
 
       return booking
     } catch (error) {
-      console.error('Error adding booking:', error.message)
+      console.error('Error adding booking:', error)
       throw new Error(error.message)
     }
+  }
+
+  findProductById(productId) {
+    return this.products.find(product => product.id === productId)
+  }
+
+  findCustomerById(customerId) {
+    return this.customers.find(customer => customer.id === customerId)
   }
 
   async cancelBooking(bookingId) {
@@ -120,8 +128,8 @@ export class BookingManager {
       this.products.splice(indexOfProduct, 2)
 
       console.log('Product', productId, 'has been removed successfully')
-    } catch {
-
+    } catch (error) {
+      console.error('Error occured when trying to removing product.')
     }
   }
 

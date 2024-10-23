@@ -6,47 +6,47 @@
 
 export default class StorageInterface {
 
-  async saveBooking (booking) {
+  async saveBooking(booking) {
     throw new Error('Method not implemented')
   }
 
-  async saveProduct (product) {
+  async saveProduct(product) {
     throw new Error('Method not implemented')
   }
 
-  async saveCustomer (customer) {
+  async saveCustomer(customer) {
     throw new Error('Method not implemented')
   }
 
-  async getBookings () {
+  async getBookings() {
     throw new Error('Method not implemented')
   }
 
-  async getBookingById (bookingId) {
+  async getBookingById(bookingId) {
     throw new Error('Method not implemented')
   }
 
-  async getProducts () {
+  async getProducts() {
     throw new Error('Method not implemented')
   }
 
-  async getProductById (productId) {
+  async getProductById(productId) {
     throw new Error('Method not implemented')
   }
 
-  async getCustomers () {
+  async getCustomers() {
     throw new Error('Method not implemented')
   }
 
-  async getCustomerById (customerId) {
+  async getCustomerById(customerId) {
     throw new Error('Method not implemented')
   }
 
-  async deleteBooking (bookingId) {
+  async deleteBooking(bookingId) {
     throw new Error('Method not implemented')
   }
 
-  async deleteProduct (productId) {
+  async deleteProduct(productId) {
     throw new Error('Method not implemented')
   }
 }

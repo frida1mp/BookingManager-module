@@ -6,7 +6,7 @@
 
 export class MockArrayStorage {
 
-  constructor () {
+  constructor() {
     this.bookings = []
     this.products = []
     this.customers = []
@@ -25,7 +25,7 @@ export class MockArrayStorage {
     return { insertedId: customer.id }
   })
 
-  getAllBookings = jest.fn(async () => this.bookings) 
+  getAllBookings = jest.fn(async () => this.bookings)
   getAllProducts = jest.fn(async () => this.products)
   getAllCustomers = jest.fn(async () => this.customers)
 

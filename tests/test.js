@@ -31,14 +31,14 @@ describe('BookingManager', () => {
     const newProduct = await createNewProduct()
 
     expect(newProduct).toBeDefined()
-    expect(newProduct.name).toBe('Product A') 
+    expect(newProduct.name).toBe('Product A')
   })
 
   test('should get all products', async () => {
     const newProduct = await createNewProduct()
     await bookingManager.addProduct(newProduct)
     const products = await bookingManager.getAllProducts()
-    expect(products.length).toBeGreaterThanOrEqual(1) 
+    expect(products.length).toBeGreaterThanOrEqual(1)
   })
 
   test('should remove a product', async () => {
@@ -66,8 +66,8 @@ describe('BookingManager', () => {
 
     const booking = await bookingManager.addBooking(newProduct.id, newCustomer.id, date)
 
-    expect(booking).toBeDefined() 
-    expect(booking.product.name).toBe('Product A') 
+    expect(booking).toBeDefined()
+    expect(booking.product.name).toBe('Product A')
   })
 
   test('should create new customer', async () => {
@@ -86,7 +86,7 @@ describe('BookingManager', () => {
     const bookings = await bookingManager.getAllBookings()
 
     expect(booking).toBeDefined()
-    expect(bookings.length).toBeGreaterThanOrEqual(1) 
+    expect(bookings.length).toBeGreaterThanOrEqual(1)
   })
 
   test('should cancel a booking', async () => {

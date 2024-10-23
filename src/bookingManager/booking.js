@@ -5,7 +5,7 @@
  */
 
 export class Booking {
-  constructor (product, customer, date) {
+  constructor(product, customer, date) {
     this.product = product
     this.customer = customer
     this.date = date
@@ -13,15 +13,15 @@ export class Booking {
     this.canceled = false
   }
 
-  generateUniqueId () {
+  generateUniqueId() {
     return 'cust-' + Date.now().toString(36) + '-' + Math.random().toString(36).substring(2, 8)
   }
 
-  cancel () {
+  cancel() {
     this.cancelled = true
   }
 
-  isCancelled () {
+  isCancelled() {
     if (this.cancelled) {
       console.log(`Booking with ID ${this.id} is cancelled.`)
     }
