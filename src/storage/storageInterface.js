@@ -5,7 +5,6 @@
  */
 
 export default class StorageInterface {
-
   async saveBooking(booking) {
     throw new Error('Method not implemented')
   }

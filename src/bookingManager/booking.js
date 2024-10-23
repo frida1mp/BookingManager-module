@@ -14,7 +14,13 @@ export class Booking {
   }
 
   generateUniqueId() {
-    return 'cust-' + Date.now().toString(36) + '-' + Math.random().toString(36).substring(2, 8)
+    try {
+      return 'cust-' + Date.now().toString(36) + '-' + Math.random().toString(36).substring(2, 8)
+    } catch (error) {
+      console.error('Failed to generate id')
+
+      return 'cust-error-' + Date.now().toString(36)
+    }
   }
 
   cancel() {
@@ -25,6 +31,7 @@ export class Booking {
     if (this.cancelled) {
       console.log(`Booking with ID ${this.id} is cancelled.`)
     }
+
     return this.cancelled
   }
 }

@@ -16,16 +16,19 @@ export class ArrayStorage extends StorageInterface {
 
   async saveBooking(booking) {
     this.bookingsCollection.push(booking)
+
     return Promise.resolve(booking)
   }
 
   async saveProduct(product) {
     this.productsCollection.push(product)
+
     return Promise.resolve(product)
   }
 
   async saveCustomer(customer) {
     this.customersCollection.push(customer)
+
     return Promise.resolve(customer)
   }
 
@@ -45,8 +48,10 @@ export class ArrayStorage extends StorageInterface {
     const index = this.bookingsCollection.findIndex(b => b.id === bookingId)
     if (index !== -1) {
       this.bookingsCollection.splice(index, 1)
+
       return { deletedCount: 1 } // Simulate deletion
     }
+
     return { deletedCount: 0 } // No booking found
   }
 
@@ -54,8 +59,10 @@ export class ArrayStorage extends StorageInterface {
     const index = this.productsCollection.findIndex(p => p.id === productId)
     if (index !== -1) {
       this.productsCollection.splice(index, 1)
+
       return { deletedCount: 1 } // Simulate deletion
     }
+
     return { deletedCount: 0 } // No booking found
   }
 }

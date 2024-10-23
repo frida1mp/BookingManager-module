@@ -48,7 +48,8 @@ export class BookingManager {
       return booking
     } catch (error) {
       console.error('Error adding booking:', error)
-      throw new Error(error.message)
+
+      return {}
     }
   }
 
@@ -111,9 +112,12 @@ export class BookingManager {
       await this.storage.saveProduct(newProduct)
 
       this.products.push(newProduct)
+
       return newProduct
     } catch (error) {
       console.error('Product could not be added.', error)
+
+      return {}
     }
   }
 
@@ -128,8 +132,12 @@ export class BookingManager {
       this.products.splice(indexOfProduct, 1)
 
       console.log('Product', productId, 'has been removed successfully')
+
+      return true
     } catch (error) {
       console.error('Error occured when trying to removing product.')
+
+      return false
     }
   }
 
