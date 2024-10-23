@@ -125,7 +125,7 @@ export class BookingManager {
         throw new Error('Product not found')
       }
       await this.storage.removeProduct(productId)
-      this.products.splice(indexOfProduct, 2)
+      this.products.splice(indexOfProduct, 1)
 
       console.log('Product', productId, 'has been removed successfully')
     } catch (error) {
