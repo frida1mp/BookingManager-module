@@ -60,6 +60,7 @@ addBooking(productId, customerId, date)
 - Returns: Booking object.
 
 Output ex: 
+```js
 Booking {
       product: Product {
         name: 'Product A',
@@ -77,6 +78,7 @@ Booking {
       id: 'cust-m2ip94ov-92rdcu',
       canceled: false
     }
+```
 
 cancelBooking(bookingId)
 - Removes a booking based on the provided ID.
@@ -88,6 +90,7 @@ getAllBookings()
 - Returns: An array of Booking objects.
 
 Output ex: Array of bookings
+```js
 [
       Booking {
         product: Product {
@@ -124,12 +127,14 @@ Output ex: Array of bookings
         canceled: false
       }
     ]
+```
 
 getBookingById(bookingId)
 - Retrieves a specific booking by its ID.
 - Returns: Booking object.
 
 Output ex:
+```js
 {
       product: Product {
         name: 'Product A',
@@ -147,12 +152,14 @@ Output ex:
       id: 'cust-m2ipf9rs-88xaob',
       canceled: false
     }
+```
 
 addProduct(name, description, price)
 - Adds a new product to the system.
 - Returns: Product object.
 
 Output ex:
+```js
 Product {
       name: 'Product A',
       description: 'testing',
@@ -160,6 +167,7 @@ Product {
       available: true,
       id: 'cust-m2ipigwj-xdvin2'
     }
+```
 
 removeProductById(productId)
 - Removes a product based on the provided ID.
@@ -171,6 +179,7 @@ getAllProducts()
 - Returns: An array of Product objects.
 
 Output ex:
+```js
 [
       Product {
         name: 'Product A',
@@ -187,16 +196,20 @@ Output ex:
         id: 'cust-m2ips5yw-ndht2v'
       }
 ]
+```
 
 addCustomer(name, email)
 - Adds a new customer to the system.
 - Returns: Customer object.
 
-Output ex: new Customer {
+Output ex: 
+```js
+new Customer {
       name: 'Test Customer',
       email: 'customer@example.com',
       id: 'cust-m2iptlnl-iw70ft'
     }
+```
 
 
 
@@ -246,5 +259,3 @@ Run the test using: npm test
 - Create a feature branch
 - Ensure all tests pass
 - Open a pull request for review
-
-
