@@ -27,9 +27,9 @@ export class BookingManager {
    */
   async loadData() {
     try {
-      this.bookings = await this.storage.getAllBookings()
-      this.products = await this.storage.getAllProducts()
-      this.customers = await this.storage.getAllCustomers()
+      this.bookings = await this.storage.getAllBookings() || []
+      this.products = await this.storage.getAllProducts() || []
+      this.customers = await this.storage.getAllCustomers() || []
     } catch (error) {
       console.log('No existing data found.')
     }

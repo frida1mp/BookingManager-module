@@ -9,7 +9,7 @@ Imagine you’re building an appointment booking system for a small business, li
 
 With just a few lines of code, you can integrate a fully functional booking system into your application. Whether you’re managing time slots for multiple staff members or handling inventory for products and services, this module allows you to focus on building the user experience while leaving the backend booking management to the module.
 
-![Example of use](./images/exUse.png)
+![Example of use](./image)
 
 
 ## For users
@@ -29,7 +29,7 @@ The module is designed to work with different storage backends. By default, we p
 
 To start using the module:
 
-- Ensure MongoDB is set up (see Dependencies).
+- If using MongoDb: Ensure MongoDB is set up (see Dependencies).
 - Use the MongoStorage class to connect the module to MongoDB, or implement your own storage that extends the StorageInterface.
 - Dependencies
 - Node.js (v14 or above)
