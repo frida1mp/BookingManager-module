@@ -105,8 +105,7 @@ export class BookingManager {
   async addProduct(product) {
     try {
       this.#validateProductData(product)
-      const newProduct = new Product(product.name, product.description, product.price)
-
+      const newProduct = this.#createNewProduct(product)
       await this.storage.saveProduct(newProduct)
 
       this.products.push(newProduct)
@@ -123,9 +122,7 @@ export class BookingManager {
     try {
       const indexOfProduct = this.products.findIndex(p => p.id === productId)
 
-      if (indexOfProduct === -1) {
-        throw new Error('Product not found')
-      }
+      this.#validateIndexOfProduct(indexOfProduct)
       await this.storage.removeProduct(productId)
       this.products.splice(indexOfProduct, 1)
 
@@ -150,9 +147,7 @@ export class BookingManager {
   async addCustomer(customer) {
     try {
       this.#validateCustomerData(customer)
-
-      const newCustomer = new Customer(customer.name, customer.email)
-
+      const newCustomer = this.#createNewCustomer(customer)
       await this.storage.saveCustomer(newCustomer)
       this.customers.push(newCustomer)
 
@@ -163,6 +158,21 @@ export class BookingManager {
     }
   }
 
+  #createNewCustomer(customer) {
+    const newCustomer = new Customer(customer.name, customer.email)
+    return newCustomer
+  }
+
+  #createNewProduct(product) {
+    const newProduct = new Product(product.name, product.description, product.price)
+    return newProduct
+  }
+
+  #validateIndexOfProduct(indexOfProduct) {
+    if (indexOfProduct === -1) {
+      throw new Error('Product not found')
+    }
+  }
   #validateProductData(product) {
     if (!product.name || !product.description || !product.price) {
       throw new Error('Invalid product data. Name, description, and price are required.')
