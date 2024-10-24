@@ -47,7 +47,7 @@ export class BookingManager {
 
       return booking
     } catch (error) {
-      console.error('Error adding booking:', error)
+      this.#handleError(error, 'Error adding booking');
 
       return {}
     }
@@ -74,8 +74,8 @@ export class BookingManager {
 
       console.log(`Booking with id ${bookingId} has been successfully removed.`)
     } catch (error) {
-      console.error('Error cancelling booking:', error.message)
-      throw new Error('Failed to cancel the booking.')
+      this.#handleError(error, 'Error cancelling booking');
+
     }
   }
 
@@ -97,16 +97,14 @@ export class BookingManager {
 
       return booking
     } catch (error) {
-      console.error('Error retrieving booking:', error.message)
-      throw new Error('Failed to retrieve booking.')
+      this.#handleError(error, 'Error getting booking');
+
     }
   }
 
   async addProduct(product) {
     try {
-      if (!product.name || !product.description || !product.price) {
-        throw new Error('Invalid product data. Name, description, and price are required.')
-      }
+      this.#validateProductData(product)
       const newProduct = new Product(product.name, product.description, product.price)
 
       await this.storage.saveProduct(newProduct)
@@ -115,7 +113,7 @@ export class BookingManager {
 
       return newProduct
     } catch (error) {
-      console.error('Product could not be added.', error)
+      this.#handleError(error, 'Error adding prodcut');
 
       return {}
     }
@@ -135,7 +133,7 @@ export class BookingManager {
 
       return true
     } catch (error) {
-      console.error('Error occured when trying to removing product.')
+      this.#handleError(error, 'Error removie product');
 
       return false
     }
@@ -145,16 +143,13 @@ export class BookingManager {
     try {
       return this.products
     } catch (error) {
-      console.error('Error retrieving products:', error.message)
-      throw new Error(error.message)
+      this.#handleError(error, 'Error getting products');
     }
   }
 
   async addCustomer(customer) {
     try {
-      if (!customer.name || !customer.email) {
-        throw new Error('Invalid customer data. Name and email are required.')
-      }
+      this.#validateCustomerData(customer)
 
       const newCustomer = new Customer(customer.name, customer.email)
 
@@ -163,8 +158,25 @@ export class BookingManager {
 
       return newCustomer
     } catch (error) {
-      console.error('Error adding customer:', error.message)
-      throw new Error('Failed to add new customer.')
+      this.#handleError(error, 'Error adding customer');
+
     }
+  }
+
+  #validateProductData(product) {
+    if (!product.name || !product.description || !product.price) {
+      throw new Error('Invalid product data. Name, description, and price are required.')
+    }
+  }
+
+  #validateCustomerData(customer) {
+    if (!customer.name || !customer.email) {
+      throw new Error('Invalid customer data. Name and email are required.');
+    }
+  }
+
+  #handleError(error, customMessage) {
+    console.error(`${customMessage}: ${error.message}`);
+    throw new Error(error, customMessage);
   }
 }
